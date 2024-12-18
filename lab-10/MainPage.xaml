@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="lab_10.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            VerticalOptions="Start">
+            <Border   Stroke="Orange" Background="Orange" StrokeThickness="3" HorizontalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0,0,55,55"/>
+                </Border.StrokeShape>
+                <StackLayout>
+                    <Image Source = "pizza.jpg" HeightRequest="130"  HorizontalOptions="Center" />
+                    <Label  Text="My Pizza Shope"   HorizontalOptions="Center" FontSize="15" FontAttributes="Bold" />
+                </StackLayout>
+            </Border>
+            <CollectionView x:Name="collView"  SelectionMode="None"  HeightRequest="400"   >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"  Span="2" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5"  RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="auto,auto">
+                            <Image  Grid.ColumnSpan= "2" Source="{Binding ImageUrl}"     HeightRequest="60" />
+                            <Label  Grid.Row= "1" Text="{Binding Title}" TextColor="OrangeRed"  HorizontalOptions="End"/>
+                            <Label Grid.Row="1" Grid.Column= "1" HorizontalOptions="Start" FontSize="Large" TextColor="RosyBrown"   Text="{Binding Price}"/>
+                            <Label Grid.Row= "2" Grid.ColumnSpan= "2" HorizontalOptions="Center" FontSize="Small" Text="{Binding Source={x:Reference _stepper}, Path=Value,      
+            StringFormat='Quantity {0}'}" VerticalOptions="CenterAndExpand" />
+                            <Stepper Grid.Row= "3" Grid.ColumnSpan= "2" x:Name="_stepper" Minimum="0"   Maximum="100" Value="{Binding quant}"  Increment="1" 
+              HorizontalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="buy" Clicked="Button_Clicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+
+</ContentPage>
